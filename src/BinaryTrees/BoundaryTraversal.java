@@ -3,19 +3,18 @@ package BinaryTrees;
 import java.util.ArrayList;
 import java.util.List;
 
-class Node {
-    int data;
-    Node left;
-    Node right;
-
-    Node(int val) {
-        data = val;
-        left = null;
-        right = null;
-    }
-}
-
 public class BoundaryTraversal {
+    static class Node {
+        int data;
+        Node left;
+        Node right;
+
+        Node(int val) {
+            data = val;
+            left = null;
+            right = null;
+        }
+    }
     boolean isLeaf(Node root) {
         return root.left == null && root.right == null;
     }
