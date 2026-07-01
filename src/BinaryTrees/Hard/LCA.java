@@ -1,4 +1,4 @@
-package BinaryTrees;
+package BinaryTrees.Hard;
 
 public class LCA {
 

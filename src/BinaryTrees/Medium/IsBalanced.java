@@ -1,6 +1,7 @@
-package BinaryTrees;
+package BinaryTrees.Medium;
 
-public class Diameter {
+
+public class IsBalanced {
     static class TreeNode {
         int val;
         TreeNode left;
@@ -19,11 +20,8 @@ public class Diameter {
         }
     }
 
-    static int max = 0;
-
-    public static int diameterOfBinaryTree(TreeNode root) {
-        maxDepth(root);
-        return max;
+    public static boolean isBalanced(TreeNode root) {
+        return maxDepth(root) != -1;
     }
 
     public static int maxDepth(TreeNode root) {
@@ -33,9 +31,20 @@ public class Diameter {
         }
 
         int leftH = maxDepth(root.left);
+
+        if (leftH == -1) {
+            return -1;
+        }
+
         int rightH = maxDepth(root.right);
 
-        max = Math.max(max, leftH + rightH);
+        if (rightH == -1) {
+            return -1;
+        }
+
+        if (Math.abs(leftH - rightH) > 1) {
+            return -1;
+        }
 
         return 1 + Math.max(leftH, rightH);
     }
@@ -44,27 +53,24 @@ public class Diameter {
 
         /*
                   1
-                 / \
-                2   3
-               / \
-              4   5
+                 /
+                2
+               /
+              3
+             /
+            4
 
-            Diameter = 3
-
-            Path:
-            4 -> 2 -> 1 -> 3
+            Not Balanced
         */
 
         TreeNode root = new TreeNode(1);
 
         root.left = new TreeNode(2);
-        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(3);
+        root.left.left.left = new TreeNode(4);
 
-        root.left.left = new TreeNode(4);
-        root.left.right = new TreeNode(5);
+        boolean result = isBalanced(root);
 
-        int diameter = diameterOfBinaryTree(root);
-
-        System.out.println("Diameter = " + diameter);
+        System.out.println("Is Balanced: " + result);
     }
 }

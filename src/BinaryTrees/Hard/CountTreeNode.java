@@ -1,8 +1,8 @@
-package BinaryTrees;
+package BinaryTrees.Hard;
 
 import java.util.Stack;
 
-public class BinaryTreeTOLinkedList {
+public class CountTreeNode {
 
     // TreeNode class
     static class TreeNode {
@@ -18,59 +18,58 @@ public class BinaryTreeTOLinkedList {
     // Solution class
     static class Solution {
 
-        public void flatten(TreeNode root) {
+        public int countNodes(TreeNode root) {
             if (root == null) {
-                return;
+                return 0;
             }
 
+            int count = 0;
             Stack<TreeNode> stack = new Stack<>();
             stack.push(root);
 
             while (!stack.isEmpty()) {
                 TreeNode current = stack.pop();
-
-                if (current.right != null) {
-                    stack.push(current.right);
-                }
+                count++;
 
                 if (current.left != null) {
                     stack.push(current.left);
                 }
 
-                if (!stack.isEmpty()) {
-                    current.right = stack.peek();
+                if (current.right != null) {
+                    stack.push(current.right);
                 }
-
-                current.left = null;
             }
-        }
-    }
 
-    // Print flattened tree
-    static void printList(TreeNode root) {
-        while (root != null) {
-            System.out.print(root.val + " ");
-            root = root.right;
+            return count;
         }
-        System.out.println();
     }
 
     public static void main(String[] args) {
 
+        /*
+                1
+               / \
+              2   3
+             / \   \
+            4   5   6
+
+        Total Nodes = 6
+        */
+
         TreeNode root = new TreeNode(1);
 
         root.left = new TreeNode(2);
-        root.right = new TreeNode(5);
+        root.right = new TreeNode(3);
 
-        root.left.left = new TreeNode(3);
-        root.left.right = new TreeNode(4);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
 
         root.right.right = new TreeNode(6);
 
         Solution solution = new Solution();
-        solution.flatten(root);
 
-        System.out.println("Flattened Tree:");
-        printList(root);
+        int totalNodes = solution.countNodes(root);
+
+        System.out.println("Total Number of Nodes: " + totalNodes);
     }
 }

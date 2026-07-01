@@ -1,4 +1,4 @@
-package BinaryTrees;
+package BinaryTrees.Medium;
 
 import java.util.*;
 

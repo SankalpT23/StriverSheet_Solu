@@ -1,8 +1,8 @@
-package BinaryTrees;
+package BinaryTrees.Medium;
 
 import java.util.*;
 
-public class BottomView {
+public class TopView {
     static class Node {
         int data;
         Node left, right;
@@ -23,7 +23,7 @@ public class BottomView {
         }
     }
 
-    public static void bottomView(Node root) {
+    public static void topView(Node root) {
 
         if (root == null)
             return;
@@ -39,8 +39,10 @@ public class BottomView {
             Node node = current.node;
             int hd = current.hd;
 
-            // Replace value every time
-            map.put(hd, node.data);
+            // Store only the first node at each horizontal distance
+            if (!map.containsKey(hd)) {
+                map.put(hd, node.data);
+            }
 
             if (node.left != null) {
                 queue.offer(new Pair(node.left, hd - 1));
@@ -51,7 +53,7 @@ public class BottomView {
             }
         }
 
-        System.out.print("Bottom View: ");
+        System.out.print("Top View: ");
 
         for (int value : map.values()) {
             System.out.print(value + " ");
@@ -85,6 +87,6 @@ public class BottomView {
 
         root.left.right.right = new Node(8);
 
-        bottomView(root);
+        topView(root);
     }
 }

@@ -1,7 +1,6 @@
-package BinaryTrees;
+package BinaryTrees.Medium;
 
-
-public class IsBalanced {
+public class MaximumDepth {
     static class TreeNode {
         int val;
         TreeNode left;
@@ -20,10 +19,6 @@ public class IsBalanced {
         }
     }
 
-    public static boolean isBalanced(TreeNode root) {
-        return maxDepth(root) != -1;
-    }
-
     public static int maxDepth(TreeNode root) {
 
         if (root == null) {
@@ -31,20 +26,7 @@ public class IsBalanced {
         }
 
         int leftH = maxDepth(root.left);
-
-        if (leftH == -1) {
-            return -1;
-        }
-
         int rightH = maxDepth(root.right);
-
-        if (rightH == -1) {
-            return -1;
-        }
-
-        if (Math.abs(leftH - rightH) > 1) {
-            return -1;
-        }
 
         return 1 + Math.max(leftH, rightH);
     }
@@ -52,25 +34,29 @@ public class IsBalanced {
     public static void main(String[] args) {
 
         /*
-                  1
-                 /
-                2
-               /
-              3
-             /
-            4
+                 1
+               /   \
+              2     3
+             / \
+            4   5
+           /
+          8
 
-            Not Balanced
+        Max Depth = 4
         */
 
         TreeNode root = new TreeNode(1);
 
         root.left = new TreeNode(2);
-        root.left.left = new TreeNode(3);
-        root.left.left.left = new TreeNode(4);
+        root.right = new TreeNode(3);
 
-        boolean result = isBalanced(root);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
 
-        System.out.println("Is Balanced: " + result);
+        root.left.left.left = new TreeNode(8);
+
+        int depth = maxDepth(root);
+
+        System.out.println("Maximum Depth = " + depth);
     }
 }

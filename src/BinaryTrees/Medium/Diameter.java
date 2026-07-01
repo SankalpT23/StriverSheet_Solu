@@ -1,6 +1,6 @@
-package BinaryTrees;
+package BinaryTrees.Medium;
 
-public class MaximumDepth {
+public class Diameter {
     static class TreeNode {
         int val;
         TreeNode left;
@@ -19,6 +19,13 @@ public class MaximumDepth {
         }
     }
 
+    static int max = 0;
+
+    public static int diameterOfBinaryTree(TreeNode root) {
+        maxDepth(root);
+        return max;
+    }
+
     public static int maxDepth(TreeNode root) {
 
         if (root == null) {
@@ -28,21 +35,24 @@ public class MaximumDepth {
         int leftH = maxDepth(root.left);
         int rightH = maxDepth(root.right);
 
+        max = Math.max(max, leftH + rightH);
+
         return 1 + Math.max(leftH, rightH);
     }
 
     public static void main(String[] args) {
 
         /*
-                 1
-               /   \
-              2     3
-             / \
-            4   5
-           /
-          8
+                  1
+                 / \
+                2   3
+               / \
+              4   5
 
-        Max Depth = 4
+            Diameter = 3
+
+            Path:
+            4 -> 2 -> 1 -> 3
         */
 
         TreeNode root = new TreeNode(1);
@@ -53,10 +63,8 @@ public class MaximumDepth {
         root.left.left = new TreeNode(4);
         root.left.right = new TreeNode(5);
 
-        root.left.left.left = new TreeNode(8);
+        int diameter = diameterOfBinaryTree(root);
 
-        int depth = maxDepth(root);
-
-        System.out.println("Maximum Depth = " + depth);
+        System.out.println("Diameter = " + diameter);
     }
 }

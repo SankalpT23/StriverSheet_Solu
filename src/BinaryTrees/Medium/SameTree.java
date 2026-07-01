@@ -1,4 +1,4 @@
-package BinaryTrees;
+package BinaryTrees.Medium;
 
 public class SameTree {
 
